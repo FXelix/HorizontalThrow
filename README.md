@@ -1,2 +1,3 @@
-# HorizontalThrow
-Using matplotlib to demonstrate how an object behaves when thrown horizontal.
+# Physics_Programs
+
+This repository is for my physics related programs. I use matplotlib for various visualisations.
