@@ -10,39 +10,38 @@ import matplotlib.pyplot as plt
 # h(x) = s = v*t = v*(2*h/g)**(1/2)
 
 
-def horizontal_throw(g=9.81, h=100, v=10, more_lines=False):
+def horizontal_throw(g=9.81, h=100, v=10, single_line=True):
     
-    if more_lines:
-        for velocity in range(1, v+1):
-            t = 0
-            coordinates = {"s_x": [],
-                          "s_y": []}
-
-            while True:
-                height = h-0.5*g*t**2
-                if height < 0:
-                    break
-                d = velocity*t
-                coordinates["s_x"].append(d)
-                coordinates["s_y"].append(height)
-                t += 1/1000
-            plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(velocity)+"m/s"))
-
-    else:
+    if single_line:
         t = 0
         coordinates = {"s_x": [],
                        "s_y": []}
         while True:
-                           
-            height = h-0.5*g*t**2
+
+            height = h - 0.5 * g * t ** 2
             if height < 0:
                 break
-            d = v*t
+            d = v * t
             coordinates["s_x"].append(d)
             coordinates["s_y"].append(height)
-            t += 1/100
-        plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(v))
+            t += 1 / 100
+        plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(v) + "m/s"))
 
+    else:
+        for velocity in range(1, v + 1):
+            t = 0
+            coordinates = {"s_x": [],
+                           "s_y": []}
+
+            while True:
+                height = h - 0.5 * g * t ** 2
+                if height < 0:
+                    break
+                d = velocity * t
+                coordinates["s_x"].append(d)
+                coordinates["s_y"].append(height)
+                t += 1 / 1000
+            plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(velocity) + "m/s"))
     plt.title("Horizontal Throw")
     plt.xlabel("Distance")
     plt.ylabel("Height")
@@ -52,4 +51,4 @@ def horizontal_throw(g=9.81, h=100, v=10, more_lines=False):
 
     plt.show()
 
-horizontal_throw(more_lines=True)
+horizontal_throw(single_line=False)
