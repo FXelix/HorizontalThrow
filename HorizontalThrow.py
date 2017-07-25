@@ -2,46 +2,34 @@ import matplotlib.pyplot as plt
 
 # g = Acceleration of gravity m/s**2
 # v = velocity
-# h = startheight
-# d = startdistance
-# t = starttime
+# h = start height
+# d = distance
+# t = start time
 
 # h(t) = -0.5*g*t**2
 # h(x) = s = v*t = v*(2*h/g)**(1/2)
 
 
-def horizontal_throw(g=9.81, h=100, v=10, single_line=True):
-    
-    if single_line:
-        t = 0
-        coordinates = {"s_x": [],
-                       "s_y": []}
-        while True:
+def plot_line(g, h, v):
+    t = 0
+    coordinates = {"s_x": [],
+                   "s_y": []}
 
-            height = h - 0.5 * g * t ** 2
-            if height < 0:
-                break
-            d = v * t
-            coordinates["s_x"].append(d)
-            coordinates["s_y"].append(height)
-            t += 1 / 100
-        plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(v) + "m/s"))
+    while True:
+        height = h - 0.5 * g * t ** 2
+        if height < 0:
+            break
+        d = v * t
+        coordinates["s_x"].append(d)
+        coordinates["s_y"].append(height)
+        t += 1 / 100
+    plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(v) + "m/s"))
 
-    else:
-        for velocity in range(1, v + 1):
-            t = 0
-            coordinates = {"s_x": [],
-                           "s_y": []}
 
-            while True:
-                height = h - 0.5 * g * t ** 2
-                if height < 0:
-                    break
-                d = velocity * t
-                coordinates["s_x"].append(d)
-                coordinates["s_y"].append(height)
-                t += 1 / 1000
-            plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(velocity) + "m/s"))
+def plot_multiple(g=9.81, h=100, v_max=10):
+    for v in range(1, v_max):
+        plot_line(g, h, v)
+
     plt.title("Horizontal Throw")
     plt.xlabel("Distance")
     plt.ylabel("Height")
@@ -49,6 +37,8 @@ def horizontal_throw(g=9.81, h=100, v=10, single_line=True):
     plt.ylim(0,)
     plt.legend()
 
-    plt.show()
+plot_line(2,100,4)
 
-horizontal_throw(single_line=False)
+plt.show()
+
+#  TODO: MAke setup_plot function
