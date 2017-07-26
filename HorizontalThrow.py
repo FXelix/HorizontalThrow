@@ -10,6 +10,15 @@ import matplotlib.pyplot as plt
 # h(x) = s = v*t = v*(2*h/g)**(1/2)
 
 
+def define_plot():
+    plt.title("Horizontal Throw")
+    plt.xlabel("Distance")
+    plt.ylabel("Height")
+    plt.xlim(0,)
+    plt.ylim(0,)
+    plt.legend()
+
+
 def plot_line(g, h, v):
     t = 0
     coordinates = {"s_x": [],
@@ -30,15 +39,7 @@ def plot_multiple(g=9.81, h=100, v_max=10):
     for v in range(1, v_max):
         plot_line(g, h, v)
 
-    plt.title("Horizontal Throw")
-    plt.xlabel("Distance")
-    plt.ylabel("Height")
-    plt.xlim(0,)
-    plt.ylim(0,)
-    plt.legend()
 
-plot_line(2,100,4)
-
+plot_multiple(v_max=20)
+define_plot()
 plt.show()
-
-#  TODO: MAke setup_plot function
