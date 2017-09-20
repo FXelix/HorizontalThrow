@@ -19,7 +19,13 @@ def define_plot():
     plt.legend()
 
 
-def plot_line(g, h, v):
+#  def plot_inclined(v, h, g):
+
+
+
+
+
+def plot_horizontal(v, h, g):
     t = 0
     coordinates = {"s_x": [],
                    "s_y": []}
@@ -35,9 +41,12 @@ def plot_line(g, h, v):
     plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(v) + "m/s"))
 
 
-def plot_multiple(g=9.81, h=100, v_max=10):
-    for v in range(1, v_max):
-        plot_line(g, h, v)
+def plot_multiple(g=9.81, h=100, v_max=10, linear=True):
+    if linear:
+        for v in range(1, v_max):
+            plot_horizontal(v, h, g)
+    else:
+        pass  # for inclined throw
 
 
 plot_multiple(v_max=20)
