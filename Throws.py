@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 
 # g = Acceleration of gravity m/s**2
 # v = velocity
@@ -8,6 +7,9 @@ import matplotlib.pyplot as plt
 
 # h(t) = -0.5*g*t**2
 # h(x) = s = v*t = v*(2*h/g)**(1/2)
+
+import matplotlib.pyplot as plt
+from math import cos, tan, radians
 
 
 def define_plot():
@@ -19,10 +21,20 @@ def define_plot():
     plt.legend()
 
 
-#  def plot_inclined(v, h, g):
+def plot_inclined(v_ges, a, h, g):
+    t = 0
+    coordinates = {"s_x": [],
+                   "s_y": []}
 
+    while True:
+        height = t*tan(radians(a)) - (g/(2*(v_ges**2)*cos(radians(a))**2))*t**2
+        if height < 0:
+            break
+        coordinates["s_x"].append(t)
+        coordinates["s_y"].append(height)
+        t += 1/100
 
-
+    plt.plot(coordinates["s_x"], coordinates["s_y"], label="v={}".format(str(v_ges) + "m/s"))
 
 
 def plot_horizontal(v, h, g):
@@ -46,9 +58,9 @@ def plot_multiple(g=9.81, h=100, v_max=10, linear=True):
         for v in range(1, v_max):
             plot_horizontal(v, h, g)
     else:
-        pass  # for inclined throw
+        for a in range(10,80,5):
+            plot_inclined(v_max, a, h, g)
 
-
-plot_multiple(v_max=20)
+plot_multiple(v_max=50, linear=False)
 define_plot()
 plt.show()
